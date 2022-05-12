@@ -129,3 +129,4 @@ def get_menu_choice(message, valid, default=None, force_lower=False):
                            for x in sorted(valid)])))
         else:
             return line if not force_lower else line.lower()
+

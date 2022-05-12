@@ -5,6 +5,7 @@
 from console import print_choice_menu, get_integer, get_string
 from logger import Logger
 
+
 class LogicImpl:
     def __init__(self):
         self._request = TaskRequest()
@@ -37,20 +38,29 @@ class LogicImpl:
         self.check_for_actions()
 
 
-    def load_data(self, filename: str) -> None:
-        available_continents = set()
-        available_countries = set()
-        try:
-            with open(file_name, 'r') as file:
-                for line in file.readlines()[skip:]:
-                    tokens = line.split()
-                    record = self.__parse_data_tokens(tokens)
+'''
+dateRep	day	month	year	cases	deaths	countriesAndTerritories	geoId	countryterritoryCode	popData2019	continentExp	Cumulative_number_for_14_days_of_COVID-19_cases_per_100000
+25.11.2020	25	11	2020	185	13	Afghanistan	AF	AFG	38041757	Asia	7,1999829
+'''
+def load_data(self, filename: str) -> None:
+    try:
+        with open(filename, 'r') as file:
+            next(file)
+            for line in file.readlines():
+                data = line.split()
+                date = data[0]
+                d, m, y, cases, deaths = map(int, data[1:6])
+                country, geoID, country_code = data[6:9]
+                population = map(int, data[9: 10])
+                continent = data[10]
+                covid_ratio = float(data[11])
+                record = self.__parse_data_tokens(tokens)
 
-                    if record:
-                        self._file_data.append(record)
-                        available_countries.add(tokens[DEFAULT_COUNTRY_INDEX].lower())
-                        available_continents.add(
-                            tokens[DEFAULT_CONTINENT_INDEX].lower()
-                        )
+                if record:
+                    self._file_data.append(record)
+                    available_countries.add(tokens[DEFAULT_COUNTRY_INDEX].lower())
+                    available_continents.add(
+                        tokens[DEFAULT_CONTINENT_INDEX].lower()
+                    )
         except:
             return
