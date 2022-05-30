@@ -13,6 +13,7 @@ import sys
 import datetime
 
 
+
 class _RangeError(Exception): pass
 
 
@@ -30,11 +31,11 @@ def get_string(message, name="string", default=None,
                     return ""
                 else:
                     raise ValueError("{0} may not be empty".format(
-                        name))
+                                     name))
             if not (minimum_length <= len(line) <= maximum_length):
                 raise ValueError("{0} must have at least {1} and "
-                                 "at most {2} characters".format(
-                    name, minimum_length, maximum_length))
+                        "at most {2} characters".format(
+                        name, minimum_length, maximum_length))
             return line if not force_lower else line.lower()
         except ValueError as err:
             print("ERROR", err)
@@ -54,11 +55,11 @@ def get_integer(message, name="integer", default=None, minimum=None,
                     return x
                 else:
                     raise _RangeError("{0} may not be 0".format(name))
-            if ((minimum is not None and minimum > x) or
-                    (maximum is not None and maximum < x)):
+            if ((minimum is not None and minimum > x) or 
+                (maximum is not None and maximum < x)):
                 raise _RangeError("{0} must be between {1} and {2} "
-                                  "inclusive{3}".format(name, minimum, maximum,
-                                                        (" (or 0)" if allow_zero else "")))
+                        "inclusive{3}".format(name, minimum, maximum,
+                        (" (or 0)" if allow_zero else "")))
             return x
         except _RangeError as err:
             print("ERROR", err)
@@ -80,12 +81,12 @@ def get_float(message, name="float", default=None, minimum=None,
                     return x
                 else:
                     raise _RangeError("{0} may not be 0.0".format(
-                        name))
-            if ((minimum is not None and minimum > x) or
-                    (maximum is not None and maximum < x)):
+                                      name))
+            if ((minimum is not None and minimum > x) or 
+                (maximum is not None and maximum < x)):
                 raise _RangeError("{0} must be between {1} and {2} "
-                                  "inclusive{3}".format(name, minimum, maximum,
-                                                        (" (or 0.0)" if allow_zero else "")))
+                        "inclusive{3}".format(name, minimum, maximum,
+                        (" (or 0.0)" if allow_zero else "")))
             return x
         except _RangeError as err:
             print("ERROR", err)
@@ -125,14 +126,8 @@ def get_menu_choice(message, valid, default=None, force_lower=False):
             return default
         if line not in valid:
             print("ERROR only {0} are valid choices".format(
-                ", ".join(["'{0}'".format(x)
-                           for x in sorted(valid)])))
+                  ", ".join(["'{0}'".format(x)
+                  for x in sorted(valid)])))
         else:
             return line if not force_lower else line.lower()
 
-
-def print_choice_menu():
-    print(f'1: Choose file to load.')
-    print(f'2: Choose file for the logger.')
-    print(f'3: Input the query string.')
-    print(f'4: Execute query.')

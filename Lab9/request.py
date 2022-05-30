@@ -70,13 +70,24 @@ class Request:
     def reset_sequence(self):
         self._commands_order = []
 
-    def get_execution_sequence(self):
-        if self.__execution_sequence:
-            return self.__execution_sequence
+    def _verify_record(self, record: list) -> bool:
+        return all(pred(record) for pred in self._commands_order)
 
-    def remove_last_query(self):
-        if len(self.__execution_sequence) > 0:
-            self.__execution_sequence = self.__execution_sequence[:-1]
+    def filter(self, records: List[list]) -> List[list]:
+        filtered = []
+        cases_or_deaths_index = 5 if self._show_deaths else 4
+        for record in records:
+            filtered.append(record) if self._verify_record(record) else None
+        return filtered
+
+    def print_cases_or_deaths(self, record: List[list]):
+    # def get_execution_sequence(self):
+    #     if self.__execution_sequence:
+    #         return self.__execution_sequence
+    #
+    # def remove_last_query(self):
+    #     if len(self.__execution_sequence) > 0:
+    #         self.__execution_sequence = self.__execution_sequence[:-1]
 
     def add_command(self, query: str) -> None:
         cmds = [cmd.upper() for cmd in query.split()]

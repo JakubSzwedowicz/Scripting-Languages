@@ -19,9 +19,9 @@ class App:
         self._logic = LogicImpl()
         self._gui = GUI() if App._version_with_gui() else None
 
-        set_new_command_callback(self._request.add_cmd)
-        set_load_file_callback(self.load_data)
-        set_check_actions_callback(self.check_for_actions)
+        # set_new_command_callback(self._request.add_cmd)
+        # set_load_file_callback(self.load_data)
+        # set_check_actions_callback(self.check_for_actions)
 
     @staticmethod
     def _version_with_gui() -> bool:

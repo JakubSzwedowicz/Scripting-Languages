@@ -1,0 +1,2 @@
+[02:43:28][INFO] Created a new file for the logger "quack.txt"
+[02:43:29][INFO] Filename "Covid.txt" with data loaded.
