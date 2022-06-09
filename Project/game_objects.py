@@ -3,7 +3,8 @@
 # e-mail: kuba.szwedowicz@gmail.com
 
 from PyQt6.QtWidgets import *
-from PyQt6.QtCore import QSizeF
+from PyQt6.QtCore import Qt, QSizeF
+from PyQt6.QtGui import QBrush
 
 
 class Ball(QGraphicsEllipseItem):
@@ -13,6 +14,7 @@ class Ball(QGraphicsEllipseItem):
         super(Ball, self).__init__(parent)
         self.velocity = [0, 0]
         self.radius = radius
+        self.setBrush(QBrush(Qt.GlobalColor.yellow, style=Qt.BrushStyle.SolidPattern))
 
     def spawn_at_point(self, x: float, y: float) -> None:
         self.setRect(x, y, self.radius, self.radius)
@@ -43,6 +45,8 @@ class Paddle(QGraphicsRectItem):
         self.max_height = max_height - size.height()
         self._size = size
         self._moving = self._options[0]
+
+        self.setBrush(QBrush(Qt.GlobalColor.white, style=Qt.BrushStyle.SolidPattern))
 
     def spawn_at_point(self, x: float, y: float):
         self.setRect(x, y, self._size.width(), self._size.height())

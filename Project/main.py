@@ -1,11 +1,9 @@
-from PyQt6.QtWidgets import QApplication
-import sys
+from game import run
 
-import game_logic
+
+def main():
+    run()
+
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    game = game_logic.PongGame()
-    game._scene_view.view.show()
-    sys.exit(app.exec())
-
+    main()

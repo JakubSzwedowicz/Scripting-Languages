@@ -10,7 +10,6 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 
 
-# class View(QGraphicsView, QObject):
 class View(QGraphicsView):
     Wpress = pyqtSignal()
     Wrelease = pyqtSignal()
@@ -32,6 +31,7 @@ class View(QGraphicsView):
 
         self.setWindowTitle('Pong')
         self.setRenderHint(QPainter.RenderHint.Antialiasing)
+        self.setStyleSheet('background: #161219;')
 
         # self.setSceneRect(self.x() - 2, self.y() + self.height() / 2 - 2, self.width(), self.height())
         # print(self.x())
